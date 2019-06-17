@@ -1,4 +1,4 @@
-package com;
+package com.lesson1;
 
 import javax.persistence.*;
 import java.util.Date;
