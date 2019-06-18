@@ -1,14 +1,13 @@
 package com.lesson5;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Repository;
 
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.io.InputStream;
+
 
 @Repository
 @Transactional
@@ -17,37 +16,17 @@ public class DAO {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public String save(InputStream inputStream) {
-        ObjectMapper objectMapper=new ObjectMapper();
-        Item item=null;
-        try {
-            item=objectMapper.readValue(inputStream,Item.class);
-        }catch (Exception e){
-            return "Save  failed!";
-        }
+    public String save(Item item) {
         entityManager.persist(item);
         return "Save  done";
     }
 
-    public String delete(String id) {
-        Integer intId = Integer.parseInt(id);
-        if (intId!=0){
-            entityManager.remove(entityManager.find(Item.class, intId));
-            return "Delete  done!";
-        }
-        return "Wrong id input";
-
+    public String delete(int id) {
+        entityManager.remove(entityManager.find(Item.class, id));
+        return "Delete  done!";
     }
 
-    public String update(InputStream inputStream){
-        ObjectMapper objectMapper=new ObjectMapper();
-        Item item=null;
-        try {
-            item=objectMapper.readValue(inputStream,Item.class);
-
-        }catch (Exception e){
-            return "Update  failed!";
-        }
+    public String update(Item item) {
         entityManager.merge(item);
         return "Save  done";
     }
