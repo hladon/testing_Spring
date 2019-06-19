@@ -1,9 +1,8 @@
 package com.lesson5;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.InputStream;
 
 @org.springframework.stereotype.Service
 public class Service {
@@ -15,39 +14,28 @@ public class Service {
         this.dao = dao;
     }
 
-    public String save(InputStream inputStream) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Item item = null;
-        try {
-            item = objectMapper.readValue(inputStream, Item.class);
-        } catch (Exception e) {
-            return e.getMessage();
+    public String save(Item item) {
+        if (dao.checkExistance(item) || dao.findById(item.getId()) != null) {
+            return "Such object exist";
         }
-
         return dao.save(item);
     }
 
-    public String delete(String id) {
-        Integer intId = Integer.parseInt(id);
-        if (intId != 0) {
-            dao.delete(intId);
-            return "Delete  done!";
+    public String delete(int id) {
+        Item item = dao.findById(id);
+        if (item != null) {
+            return dao.delete(item);
         }
-        return "Wrong id input";
+        return "Item don`t exist in storage";
 
     }
 
-    public String update(InputStream inputStream) {
-        ObjectMapper objectMapper = new ObjectMapper();
-        Item item = null;
-        try {
-            item = objectMapper.readValue(inputStream, Item.class);
-
-        } catch (Exception e) {
-            return e.getMessage();
+    public String update(Item item) {
+        if (dao.findById(item.getId()) == null) {
+            return "Such object don`t exist";
         }
-        dao.save(item);
-        return "Save  done";
+        return dao.update(item);
     }
+
 
 }

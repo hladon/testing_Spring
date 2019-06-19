@@ -21,14 +21,22 @@ public class DAO {
         return "Save  done";
     }
 
-    public String delete(int id) {
-        entityManager.remove(entityManager.find(Item.class, id));
+    public String delete(Item item) {
+        entityManager.remove(item);
         return "Delete  done!";
     }
 
     public String update(Item item) {
         entityManager.merge(item);
         return "Save  done";
+    }
+
+    public Item findById(int id) {
+        return entityManager.find(Item.class, id);
+    }
+
+    public boolean checkExistance(Item item) {
+        return entityManager.contains(item);
     }
 
 
