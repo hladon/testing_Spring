@@ -1,4 +1,4 @@
-package com.lesson6;
+package com.lesson6.model;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -26,19 +26,24 @@ public class Flight {
     public Plane getPlane() {
         return plane;
     }
-
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "STORY",
+            joinColumns = @JoinColumn(name = "FLIGHT"),
+            inverseJoinColumns = @JoinColumn(name = "PASSENGER")
+    )
     public List<Passenger> getPassanger() {
         return passanger;
     }
-
+    @Column(name = "DATE_FLIGHT")
     public Date getDateFlight() {
         return dateFlight;
     }
-
+    @Column(name = "CITY_FROM")
     public String getCityFrom() {
         return cityFrom;
     }
-
+    @Column(name = "CITY_TO")
     public String getCityTo() {
         return cityTo;
     }

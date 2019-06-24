@@ -1,4 +1,4 @@
-package com.lesson6;
+package com.lesson6.model;
 
 
 import javax.persistence.*;
