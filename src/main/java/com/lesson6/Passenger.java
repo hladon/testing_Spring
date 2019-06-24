@@ -1,8 +1,13 @@
 package com.lesson6;
 
+
+
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name = "PASSENGER")
 public class Passenger {
     Long id;
     String lastName;
@@ -11,26 +16,35 @@ public class Passenger {
     String passportCode;
     List<Flight> flights;
 
+    @Id
+    @SequenceGenerator(name = "PASSENGER_SK", sequenceName = "PASSENGER_SK", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PASSENGER_SK")
     public Long getId() {
         return id;
     }
 
+    @Column(name = "LAST_NAME")
     public String getLastName() {
         return lastName;
     }
-
+    @Column(name = "NATIONALITY")
     public String getNationality() {
         return nationality;
     }
-
+    @Column(name = "DATE_OF_BIRTH")
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
-
+    @Column(name = "PASPORT_CODE")
     public String getPassportCode() {
         return passportCode;
     }
-
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "STORY",
+            joinColumns = @JoinColumn(name = "PASSENGER"),
+            inverseJoinColumns = @JoinColumn(name = "FLIGHT")
+    )
     public List<Flight> getFlights() {
         return flights;
     }

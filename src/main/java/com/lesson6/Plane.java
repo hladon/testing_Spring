@@ -1,7 +1,11 @@
 package com.lesson6;
 
+
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "PLANE")
 public class Plane {
 
     Long id;
@@ -10,22 +14,25 @@ public class Plane {
     Date yearProduced;
     Double avgFuelConsumption;
 
+    @Id
+    @SequenceGenerator(name = "PLANE_SK", sequenceName = "PLANE_SK", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "PLANE_SK")
     public Long getId() {
         return id;
     }
-
+    @Column(name = "MODEL")
     public String getModel() {
         return model;
     }
-
+    @Column(name="CODE")
     public String getCode() {
         return code;
     }
-
+    @Column(name="YEAR_PRODUCED")
     public Date getYearProduced() {
         return yearProduced;
     }
-
+    @Column(name="CONSUMPTION")
     public Double getAvgFuelConsumption() {
         return avgFuelConsumption;
     }

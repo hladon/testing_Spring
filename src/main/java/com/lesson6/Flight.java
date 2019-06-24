@@ -1,8 +1,12 @@
 package com.lesson6;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+
+@Entity
+@Table(name = "FLIGHT")
 public class Flight {
     Long id;
     Plane plane;
@@ -11,10 +15,14 @@ public class Flight {
     String cityFrom;
     String cityTo;
 
+    @Id
+    @SequenceGenerator(name = "FLIGHT_SK", sequenceName = "FLIGHT_SK", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "FLIGHT_SK")
     public Long getId() {
         return id;
     }
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     public Plane getPlane() {
         return plane;
     }
