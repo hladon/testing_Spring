@@ -10,8 +10,8 @@ public class PlaneDao extends Repository<Plane> {
         return entityManager.find(Plane.class, id);
     }
 
-    public List<Plane> selectByRequest(String query){
-        List<Plane> list=entityManager.createNativeQuery(query,Plane.class).getResultList();
+    public List<Plane> selectAll(){
+        List<Plane> list=entityManager.createNativeQuery("SELECT * FROM PLANE ",Plane.class).getResultList();
         return list;
     }
 }
