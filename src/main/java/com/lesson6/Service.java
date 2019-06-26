@@ -4,10 +4,9 @@ import com.lesson6.model.Plane;
 import com.lesson6.repository.PlaneDao;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 
 public class Service {
 
@@ -16,13 +15,16 @@ public class Service {
 
     public List<Plane> oldPlanes(){
         List<Plane> planeList=planeDao.selectAll();
-        List<Plane> planes;
-        LocalDate localDate=LocalDate.now();
-        LocalDate dateTwentyEgo=localDate.minusYears(20);
+        List<Plane> planes=null;
+        long lifeTime=20*315569250*100;// 20 years in miliseconds
         for(Plane plane:planeList){
             long diff=plane.getYearProduced().getTime()-new Date().getTime();
-            if(TimeUnit.DAYS.convert((plane.getYearProduced().getTime()-new Date().getTime()),TimeUnit.MILLISECONDS)))
-
+            if(diff>lifeTime){
+                planes.add(plane);
+            }
         }
+        return planes;
     }
+
+
 }
