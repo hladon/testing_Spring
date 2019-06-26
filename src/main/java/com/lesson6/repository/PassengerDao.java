@@ -7,4 +7,6 @@ public class PassengerDao extends Repository<Passenger> {
     public Passenger findById(int id) {
         return entityManager.find(Passenger.class, id);
     }
+
+
 }

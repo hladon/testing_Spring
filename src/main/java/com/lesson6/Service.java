@@ -1,5 +1,6 @@
 package com.lesson6;
 
+import com.lesson6.model.Passenger;
 import com.lesson6.model.Plane;
 import com.lesson6.repository.PlaneDao;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,8 @@ public class Service {
         return planes;
     }
 
+    public Passenger regularPassenger(int year){
+
+    }
 
 }
