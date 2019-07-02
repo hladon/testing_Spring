@@ -15,10 +15,14 @@ public class FlightDao extends Repository<Flight>{
     }
 
     public List<Flight> selectBycityFrom(String city){
-        List<Flight> list=entityManager.createQuery("SELECT Flight FROM FLIGHT WHERE CITY_FROM =:city",Flight.class)
+        List<Flight> list=entityManager.createNamedQuery("SELECT Flight FROM FLIGHT WHERE CITY_FROM =:city",Flight.class)
                 .setParameter("city",city)
                 .getResultList();
         return list;
     }
 
+    public List<String> mostPopular(){
+        List<String> list=entityManager.createNativeQuery("SELECT CITY_FROM, COUNT(CITY_FROM) AS val FROM FLIGHT GROUP BY CITY_FROM ORDER BY val DESC",String.class).getResultList();
+        return list;
+    }
 }
