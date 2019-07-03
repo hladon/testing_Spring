@@ -15,7 +15,7 @@ public class FlightDao extends Repository<Flight>{
     }
 
     public List<Flight> selectBycityFrom(String city){
-        List<Flight> list=entityManager.createNamedQuery("SELECT Flight FROM FLIGHT WHERE CITY_FROM =:city",Flight.class)
+        List<Flight> list=entityManager.createNamedQuery("SELECT Flight FROM Flight WHERE CITY_FROM =:city",Flight.class)
                 .setParameter("city",city)
                 .getResultList();
         return list;
