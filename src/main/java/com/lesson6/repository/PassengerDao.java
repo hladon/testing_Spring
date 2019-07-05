@@ -11,6 +11,7 @@ public class PassengerDao extends Repository<Passenger> {
     }
 
     public List<Passenger> regularPassenger(int year){
-        List<Passenger> list=entityManager.createNamedQuery("SELECT p FROM Passenger WHERE YEAR(p.)")
+//        return List<Passenger> list=entityManager.createNamedQuery("SELECT p FROM Passenger WHERE YEAR(p.)",Passenger.class).getResultList();
+        return null;
     }
 }

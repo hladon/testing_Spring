@@ -8,7 +8,9 @@ import java.util.Objects;
 @Table(name = "ITEM")
 public class Item {
     private int id;
+    private String name;
     private String description;
+
 
     @Id
     @SequenceGenerator(name = "ITEM_SK", sequenceName = "ITEM_SK", allocationSize = 1)
@@ -17,13 +19,21 @@ public class Item {
         return id;
     }
 
+    @Column(name = "NAME")
+    public String getName() {
+        return name;
+    }
+    @Column(name = "DESCRIPTION")
+    public String getDescription() {
+        return description;
+    }
+
     public void setId(int id) {
         this.id = id;
     }
 
-    @Column(name = "DESCRIPTION")
-    public String getDescription() {
-        return description;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setDescription(String description) {

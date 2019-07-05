@@ -28,15 +28,15 @@ public class Service {
     }
 
     public List<Flight> flightsByDate(Filter filter){
-
+        return null;
     }
 
     public Passenger regularPassenger(int year){
-
+        return null;
     }
 
     public List<Plane> regularPlanes(int year){
-
+        return null;
     }
 
     public List<String> mostPopularTo(){

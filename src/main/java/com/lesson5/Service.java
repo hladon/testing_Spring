@@ -37,5 +37,9 @@ public class Service {
         return dao.update(item);
     }
 
+    public void deleteByName(String name){
+        dao.deleteByName(name);
+    }
+
 
 }
