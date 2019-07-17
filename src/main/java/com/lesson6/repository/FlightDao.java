@@ -3,7 +3,7 @@ package com.lesson6.repository;
 import com.lesson6.model.Flight;
 
 import java.util.List;
-
+@org.springframework.stereotype.Repository
 public class FlightDao extends Repository<Flight>{
 
     public Flight findById(int id) {

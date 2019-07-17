@@ -4,7 +4,7 @@ package com.lesson5;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-@org.springframework.stereotype.Service
+//@org.springframework.stereotype.Service
 public class Service {
 
     private DAO dao;

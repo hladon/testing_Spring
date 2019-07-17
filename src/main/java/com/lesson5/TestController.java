@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.InputStream;
 
 
-@Controller
+//@Controller
 public class TestController {
 
     private Service service;
