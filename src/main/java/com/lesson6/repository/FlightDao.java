@@ -1,6 +1,7 @@
 package com.lesson6.repository;
 
 import com.lesson6.model.Flight;
+import com.lesson6.model.Plane;
 
 import java.util.List;
 
@@ -28,6 +29,11 @@ public class FlightDao extends Repository<Flight>{
 
     public List<String> mostPopularTo(){
         List<String> list=entityManager.createNativeQuery("SELECT CITY_TO, COUNT(CITY_TO) AS val FROM FLIGHT GROUP BY CITY_TO ORDER BY val DESC",String.class).getResultList();
+        return list;
+    }
+
+    public List<Plane> regularPlanes(){
+        List<Plane> list=entityManager.createNamedQuery("SELECT CITY_TO, COUNT(CITY_TO) AS val FROM FLIGHT GROUP BY CITY_TO ORDER BY val DESC",Plane.class).getResultList();
         return list;
     }
 }
