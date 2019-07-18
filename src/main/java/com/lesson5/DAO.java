@@ -38,6 +38,9 @@ public class DAO {
     public boolean checkExistance(Item item) {
         return entityManager.contains(item);
     }
-
+    @Transactional
+    public void deleteByName(String name){
+        entityManager.createQuery("DELETE  FROM Item i WHERE i.name=?1").setParameter(1,name).executeUpdate();
+    }
 
 }

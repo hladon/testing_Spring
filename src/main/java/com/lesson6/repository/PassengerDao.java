@@ -3,14 +3,23 @@ package com.lesson6.repository;
 import com.lesson6.model.Passenger;
 
 import java.util.List;
-
+@org.springframework.stereotype.Repository
 public class PassengerDao extends Repository<Passenger> {
 
     public Passenger findById(int id) {
         return entityManager.find(Passenger.class, id);
     }
 
-    public List<Passenger> regularPassenger(int year){
-        List<Passenger> list=entityManager.createNamedQuery("SELECT p FROM Passenger WHERE YEAR(p.)")
+    public List<Passenger> regularPassenger(int year,int flights){
+        return entityManager.createNativeQuery(
+                "SELECT *, COUNT(story.flight) count1 FROM PASSENGER \n" +
+                        "JOIN STORY ON story.id=passenger.id\n" +
+                        "JOIN FLIGHT ON flight.id=story.flight\n" +
+                        "AND EXTRACT(YEAR FROM flight.date_flight)=?1\n" +
+                        "GROUP BY passenger.last_name HAVING COUNT(story.flight)>?2",
+                Passenger.class).
+                setParameter(1,year).
+                setParameter(2,flights).
+                getResultList();
     }
 }

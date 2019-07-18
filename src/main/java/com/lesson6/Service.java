@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Date;
 import java.util.List;
 
-
+@org.springframework.stereotype.Service
 public class Service {
 
     @Autowired
@@ -28,15 +28,15 @@ public class Service {
     }
 
     public List<Flight> flightsByDate(Filter filter){
-
+        return null;
     }
 
     public Passenger regularPassenger(int year){
-
+        return null;
     }
 
     public List<Plane> regularPlanes(int year){
-
+        return null;
     }
 
     public List<String> mostPopularTo(){

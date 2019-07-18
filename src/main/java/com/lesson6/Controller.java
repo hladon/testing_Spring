@@ -4,6 +4,7 @@ import com.lesson6.model.Filter;
 import com.lesson6.model.Flight;
 import com.lesson6.model.Plane;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,10 +15,11 @@ public class Controller {
     private Service service;
 
     public List<Flight> flightByDate(Filter filter){
-
+        return null;
     }
-
-    public List<Plane> oldPlanes(){
+    @RequestMapping(method = RequestMethod.GET,value = "/oldPlanes",produces = "text/plain")
+    public @ResponseBody
+    List<Plane> oldPlanes(){
         return service.oldPlanes();
     }
 }

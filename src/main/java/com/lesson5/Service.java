@@ -4,7 +4,7 @@ package com.lesson5;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
-@org.springframework.stereotype.Service
+//@org.springframework.stereotype.Service
 public class Service {
 
     private DAO dao;
@@ -35,6 +35,10 @@ public class Service {
             return "Such object don`t exist";
         }
         return dao.update(item);
+    }
+
+    public void deleteByName(String name){
+        dao.deleteByName(name);
     }
 
 
