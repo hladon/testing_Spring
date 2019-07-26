@@ -17,9 +17,14 @@ public class Controller {
     public List<Flight> flightByDate(Filter filter){
         return null;
     }
+
     @RequestMapping(method = RequestMethod.GET,value = "/oldPlanes",produces = "text/plain")
-    public @ResponseBody
-    List<Plane> oldPlanes(){
-        return service.oldPlanes();
+    public @ResponseBody String oldPlanes(){
+        String returnData="";
+        for (Plane plane: service.oldPlanes()){
+            returnData+=plane+"/n";
+
+        }
+        return returnData;
     }
 }
