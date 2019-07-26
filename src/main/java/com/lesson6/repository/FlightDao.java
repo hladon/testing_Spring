@@ -6,9 +6,10 @@ import java.util.List;
 @org.springframework.stereotype.Repository
 public class FlightDao extends Repository<Flight>{
 
-    public Flight findById(int id) {
-        return entityManager.find(Flight.class, id);
+    public FlightDao() {
+        type=Flight.class;
     }
+
     public List<Flight> selectAll(){
         List<Flight> list=entityManager.createNativeQuery("SELECT * FROM FLIGHT ",Flight.class).getResultList();
         return list;

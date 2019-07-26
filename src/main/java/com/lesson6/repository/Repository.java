@@ -12,6 +12,12 @@ public class Repository <T> {
     @PersistenceContext
     protected EntityManager entityManager;
 
+    Class<T> type;
+
+    public T findById (int id){
+        return entityManager.find(type, id);
+    }
+
     public String save(T item) {
         entityManager.persist(item);
         return "Save  done";

@@ -8,8 +8,8 @@ import java.util.List;
 @org.springframework.stereotype.Repository
 public class PlaneDao extends Repository<Plane> {
 
-    public Plane findById(int id) {
-        return entityManager.find(Plane.class, id);
+    public PlaneDao() {
+        type=Plane.class;
     }
 
     public List<Plane> planesProducedBefore(Date date){

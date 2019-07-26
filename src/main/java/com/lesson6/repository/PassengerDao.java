@@ -6,11 +6,11 @@ import java.util.List;
 @org.springframework.stereotype.Repository
 public class PassengerDao extends Repository<Passenger> {
 
-    public Passenger findById(int id) {
-        return entityManager.find(Passenger.class, id);
+    public PassengerDao() {
+        type=Passenger.class;
     }
 
-    public List<Passenger> regularPassenger(int year,int flights){
+    public List<Passenger> regularPassenger(int year, int flights){
         return entityManager.createNativeQuery(
                 "SELECT *, COUNT(story.flight) count1 FROM PASSENGER \n" +
                         "JOIN STORY ON story.id=passenger.id\n" +
