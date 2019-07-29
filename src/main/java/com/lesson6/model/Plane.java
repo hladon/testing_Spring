@@ -56,4 +56,15 @@ public class Plane {
     public void setAvgFuelConsumption(Double avgFuelConsumption) {
         this.avgFuelConsumption = avgFuelConsumption;
     }
+
+    @Override
+    public String toString() {
+        return "Plane{" +
+                "id=" + id +
+                ", model='" + model + '\'' +
+                ", code='" + code + '\'' +
+                ", yearProduced=" + yearProduced +
+                ", avgFuelConsumption=" + avgFuelConsumption +
+                '}';
+    }
 }

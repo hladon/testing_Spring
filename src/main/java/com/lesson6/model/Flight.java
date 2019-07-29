@@ -71,4 +71,16 @@ public class Flight {
     public void setCityTo(String cityTo) {
         this.cityTo = cityTo;
     }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "id=" + id +
+                ", plane=" + plane +
+                ", passanger=" + passanger +
+                ", dateFlight=" + dateFlight +
+                ", cityFrom='" + cityFrom + '\'' +
+                ", cityTo='" + cityTo + '\'' +
+                '}';
+    }
 }

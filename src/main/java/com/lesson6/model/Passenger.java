@@ -72,4 +72,16 @@ public class Passenger {
     public void setFlights(List<Flight> flights) {
         this.flights = flights;
     }
+
+    @Override
+    public String toString() {
+        return "Passenger{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", nationality='" + nationality + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", passportCode='" + passportCode + '\'' +
+                ", flights=" + flights +
+                '}';
+    }
 }

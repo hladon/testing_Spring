@@ -9,6 +9,9 @@ import com.lesson6.repository.PlaneDao;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -22,16 +25,18 @@ public class Service {
     private FlightDao flightDao;
 
     public List<Plane> oldPlanes(){
-        DateTime date=new DateTime();
-        Date dateProduced=date.minusYears(20).toDate();
-        return planeDao.planesProducedBefore(dateProduced);
+        Date date = new Date();
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int year  = localDate.getYear();
+        int yearProduced=year-20;
+        return planeDao.planesProducedBefore(yearProduced);
     }
 
     public List<Flight> flightsByDate(Filter filter){
         return null;
     }
 
-    public Passenger regularPassenger(int year){
+    public List<Passenger> regularPassengers(int year){
         return null;
     }
 
@@ -39,11 +44,11 @@ public class Service {
         return null;
     }
 
-    public List<String> mostPopularTo(){
+    public List<Flight> mostPopularTo(){
         return flightDao.mostPopularTo();
     }
 
-    public List<String> mostPopularFrom(){
+    public List<Flight> mostPopularFrom(){
         return flightDao.mostPopularFrom();
     }
 
