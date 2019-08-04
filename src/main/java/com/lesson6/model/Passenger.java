@@ -81,7 +81,6 @@ public class Passenger {
                 ", nationality='" + nationality + '\'' +
                 ", dateOfBirth=" + dateOfBirth +
                 ", passportCode='" + passportCode + '\'' +
-                ", flights=" + flights +
                 '}';
     }
 }

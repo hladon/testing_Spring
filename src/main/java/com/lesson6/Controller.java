@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
+
 import java.io.InputStream;
-import java.util.List;
+
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -41,7 +41,6 @@ public class Controller {
         String returnData="";
         for (Plane plane: service.oldPlanes()){
             returnData+=plane.toString()+"\n";
-
         }
         return returnData;
     }
@@ -51,7 +50,6 @@ public class Controller {
         String returnData="";
         for (Passenger passenger: service.regularPassengers(year)){
             returnData+=passenger.toString()+"\n";
-
         }
         return returnData;
     }

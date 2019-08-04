@@ -8,14 +8,13 @@ public class Filter {
     private Date dateTo;
     private String cityFrom;
     private String cityTo;
-    private String planeModel;
+
 
     public Filter(Date dateFrom, Date dateTo, String cityFrom, String cityTo, String planeModel) {
         this.dateFrom = dateFrom;
         this.dateTo = dateTo;
         this.cityFrom = cityFrom;
         this.cityTo = cityTo;
-        this.planeModel = planeModel;
     }
 
     public Date getDateFrom() {
@@ -50,11 +49,4 @@ public class Filter {
         this.cityTo = cityTo;
     }
 
-    public String getPlaneModel() {
-        return planeModel;
-    }
-
-    public void setPlaneModel(String planeModel) {
-        this.planeModel = planeModel;
-    }
 }
