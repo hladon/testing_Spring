@@ -42,12 +42,12 @@ public class Service {
     }
 
     public List<Passenger> regularPassengers(int year){
-        int numberOfFlights=25;
+        int numberOfFlights=2;
         return passengerDao.regularPassenger(year,numberOfFlights);
     }
 
     public List<Plane> regularPlanes(int year){
-        int numberOfFlights=25;
+        int numberOfFlights=2;
         return planeDao.regularPlanes(year,numberOfFlights);
     }
 

@@ -20,20 +20,15 @@ public class Controller {
     private Service service;
 
     @RequestMapping(method = RequestMethod.POST,value = "/oldPlanes",produces = "text/plain",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String flightByDate(InputStream inputStream){
-        ObjectMapper objectMapper = new ObjectMapper();
-        Filter filter = null;
+    public String flightByDate(@RequestBody Filter filter){
+        System.out.println(filter);
         String returnData="";
-        try {
-            filter= objectMapper.readValue(inputStream, Filter.class);
-        } catch (Exception e) {
-            return e.getMessage();
-        }
         for (Flight flight: service.flightsByDate(filter)){
             returnData+=flight.toString()+"\n";
 
         }
-        return null;
+
+        return returnData;
     }
 
     @RequestMapping(method = RequestMethod.GET,value = "/oldPlanes",produces = "text/plain")
