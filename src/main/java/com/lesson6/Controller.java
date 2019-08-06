@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 
 @org.springframework.stereotype.Controller
@@ -20,13 +23,24 @@ public class Controller {
     private Service service;
 
     @RequestMapping(method = RequestMethod.POST,value = "/oldPlanes",produces = "text/plain",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String flightByDate(@RequestBody Filter filter){
-        System.out.println(filter);
-        String returnData="";
-        for (Flight flight: service.flightsByDate(filter)){
-            returnData+=flight.toString()+"\n";
-
+    public String flightByDate(@RequestBody InputStream inputStream){
+        ObjectMapper objectMapper=new ObjectMapper();
+        Filter filter=null;
+        Scanner s = new Scanner(inputStream).useDelimiter("\\A");
+        String result = s.hasNext() ? s.next() : "";
+        Map<String,String> map;
+        try{
+            map=objectMapper.readValue(result, HashMap.class);
+        }catch (Exception e){
+            System.out.println("Wrong mapping");
+            return e.getMessage();
         }
+        System.out.println(map);
+        String returnData="";
+//        for (Flight flight: service.flightsByDate(filter)){
+//            returnData+=flight.toString()+"\n";
+//
+//        }
 
         return returnData;
     }

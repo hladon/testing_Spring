@@ -2,10 +2,12 @@ package com.lesson6.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Filter {
+
+public class Filter implements Serializable {
 
     private Date dateFrom;
     private Date dateTo;
@@ -37,6 +39,7 @@ public class Filter {
     public String getCityTo() {
         return cityTo;
     }
+
     @JsonProperty("dateFrom")
     public void setDateFrom(String dateFrom) throws Exception {
         this.dateFrom =new SimpleDateFormat("dd/MM/yyyy").parse(dateFrom);
