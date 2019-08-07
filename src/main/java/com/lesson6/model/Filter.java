@@ -1,6 +1,5 @@
 package com.lesson6.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -41,9 +40,10 @@ public class Filter implements Serializable {
     }
 
     public void setDateFrom(String dateFrom) throws Exception {
-        this.dateFrom =new SimpleDateFormat("dd/MM/yyyy").parse(dateFrom);
+        this.dateFrom = new SimpleDateFormat("dd/MM/yyyy").parse(dateFrom);
     }
-    public void setDateTo(String dateTo) throws Exception{
+
+    public void setDateTo(String dateTo) throws Exception {
         this.dateTo = new SimpleDateFormat("dd/MM/yyyy").parse(dateTo);
     }
 

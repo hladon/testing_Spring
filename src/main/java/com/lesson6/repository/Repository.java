@@ -7,14 +7,14 @@ import javax.transaction.Transactional;
 
 @org.springframework.stereotype.Repository
 @Transactional
-public class Repository <T> {
+public class Repository<T> {
 
     @PersistenceContext
     protected EntityManager entityManager;
 
     Class<T> type;
 
-    public T findById (int id){
+    public T findById(int id) {
         return entityManager.find(type, id);
     }
 

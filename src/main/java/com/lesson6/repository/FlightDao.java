@@ -17,19 +17,19 @@ public class FlightDao extends Repository<Flight> {
         type = Flight.class;
     }
 
-    public List<Flight> flightsByDate(Filter filter){
-        CriteriaBuilder builder=entityManager.getCriteriaBuilder();
-        CriteriaQuery<Flight> criteria=builder.createQuery(Flight.class);
-        Root <Flight> root=criteria.from(Flight.class);
+    public List<Flight> flightsByDate(Filter filter) {
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Flight> criteria = builder.createQuery(Flight.class);
+        Root<Flight> root = criteria.from(Flight.class);
         criteria.select(root);
-        List<Predicate> predicates=new ArrayList<Predicate>();
-        if (filter.getCityFrom()!=null){
-            predicates.add(builder.like(root.get("CITY_FROM"),filter.getCityFrom()));
+        List<Predicate> predicates = new ArrayList<Predicate>();
+        if (filter.getCityFrom() != null) {
+            predicates.add(builder.like(root.get("cityFrom"), filter.getCityFrom()));
         }
-        if (filter.getCityTo()!=null){
-            predicates.add(builder.like(root.get("CITY_TO"),filter.getCityTo()));
+        if (filter.getCityTo() != null) {
+            predicates.add(builder.like(root.get("cityTo"), filter.getCityTo()));
         }
-        predicates.add(builder.between(root.get("DATE_FLIGHT"),filter.getDateFrom(),filter.getDateTo()));
+        predicates.add(builder.between(root.get("dateFlight"), filter.getDateFrom(), filter.getDateTo()));
         criteria.where(predicates.toArray(new Predicate[]{}));
         return entityManager.createQuery(criteria).getResultList();
     }

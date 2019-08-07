@@ -20,19 +20,23 @@ public class Plane {
     public Long getId() {
         return id;
     }
+
     @Column(name = "MODEL")
     public String getModel() {
         return model;
     }
-    @Column(name="CODE")
+
+    @Column(name = "CODE")
     public String getCode() {
         return code;
     }
-    @Column(name="YEAR_PRODUCED")
+
+    @Column(name = "YEAR_PRODUCED")
     public Date getYearProduced() {
         return yearProduced;
     }
-    @Column(name="CONSUMPTION")
+
+    @Column(name = "CONSUMPTION")
     public Double getAvgFuelConsumption() {
         return avgFuelConsumption;
     }
