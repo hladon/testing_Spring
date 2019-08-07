@@ -23,24 +23,22 @@ public class Controller {
     private Service service;
 
     @RequestMapping(method = RequestMethod.POST,value = "/oldPlanes",produces = "text/plain",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String flightByDate(@RequestBody InputStream inputStream){
+    public @ResponseBody String flightByDate( InputStream inputStream){
         ObjectMapper objectMapper=new ObjectMapper();
         Filter filter=null;
-        Scanner s = new Scanner(inputStream).useDelimiter("\\A");
-        String result = s.hasNext() ? s.next() : "";
-        Map<String,String> map;
+
         try{
-            map=objectMapper.readValue(result, HashMap.class);
+            filter=objectMapper.readValue(inputStream, Filter.class);
         }catch (Exception e){
             System.out.println("Wrong mapping");
             return e.getMessage();
         }
-        System.out.println(map);
+        System.out.println(filter);
         String returnData="";
-//        for (Flight flight: service.flightsByDate(filter)){
-//            returnData+=flight.toString()+"\n";
-//
-//        }
+        for (Flight flight: service.flightsByDate(filter)){
+            returnData+=flight.toString()+"\n";
+
+        }
 
         return returnData;
     }
