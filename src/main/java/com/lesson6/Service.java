@@ -5,6 +5,7 @@ import com.lesson6.model.Flight;
 import com.lesson6.model.Passenger;
 import com.lesson6.model.Plane;
 import com.lesson6.repository.FlightDao;
+import com.lesson6.repository.PassengerDao;
 import com.lesson6.repository.PlaneDao;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class Service {
     @Autowired
     private FlightDao flightDao;
 
+    @Autowired
+    private PassengerDao passengerDao;
+
     public List<Plane> oldPlanes(){
         DateTime date=new DateTime();
         Date dateProduced=date.minusYears(20).toDate();
@@ -31,12 +35,13 @@ public class Service {
         return null;
     }
 
-    public Passenger regularPassenger(int year){
-        return null;
+    public List<Passenger> regularPassenger(int year){
+        int regQuantity=3;
+        return passengerDao.regularPassenger(year,regQuantity);
     }
 
     public List<Plane> regularPlanes(int year){
-        return null;
+        return planeDao.regularPlanes(year);
     }
 
     public List<String> mostPopularTo(){

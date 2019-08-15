@@ -22,7 +22,7 @@ public class Flight {
         return id;
     }
     @OneToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
+    @PrimaryKeyJoinColumn(name = "PLANE")
     public Plane getPlane() {
         return plane;
     }
