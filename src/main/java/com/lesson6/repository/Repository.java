@@ -1,20 +1,18 @@
 package com.lesson6.repository;
 
 
-import com.lesson6.model.Plane;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 @org.springframework.stereotype.Repository
 @Transactional
-public class Repository <T> {
-
-    protected Class<T> type;
+public class Repository<T> {
 
     @PersistenceContext
     protected EntityManager entityManager;
+
+    Class<T> type;
 
     public T findById(int id) {
         return entityManager.find(type, id);
@@ -34,6 +32,5 @@ public class Repository <T> {
         entityManager.merge(item);
         return "Update  done";
     }
-
 
 }

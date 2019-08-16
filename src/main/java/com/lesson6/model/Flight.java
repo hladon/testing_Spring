@@ -21,11 +21,13 @@ public class Flight {
     public Long getId() {
         return id;
     }
+
     @OneToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "PLANE")
     public Plane getPlane() {
         return plane;
     }
+
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "STORY",
@@ -35,14 +37,17 @@ public class Flight {
     public List<Passenger> getPassanger() {
         return passanger;
     }
+
     @Column(name = "DATE_FLIGHT")
     public Date getDateFlight() {
         return dateFlight;
     }
+
     @Column(name = "CITY_FROM")
     public String getCityFrom() {
         return cityFrom;
     }
+
     @Column(name = "CITY_TO")
     public String getCityTo() {
         return cityTo;
@@ -70,5 +75,15 @@ public class Flight {
 
     public void setCityTo(String cityTo) {
         this.cityTo = cityTo;
+    }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "id=" + id +
+                ", dateFlight=" + dateFlight +
+                ", cityFrom='" + cityFrom + '\'' +
+                ", cityTo='" + cityTo + '\'' +
+                '}';
     }
 }

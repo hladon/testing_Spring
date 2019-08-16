@@ -1,7 +1,6 @@
 package com.lesson6.model;
 
 
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -27,18 +26,22 @@ public class Passenger {
     public String getLastName() {
         return lastName;
     }
+
     @Column(name = "NATIONALITY")
     public String getNationality() {
         return nationality;
     }
+
     @Column(name = "DATE_OF_BIRTH")
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
+
     @Column(name = "PASPORT_CODE")
     public String getPassportCode() {
         return passportCode;
     }
+
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "STORY",
@@ -71,5 +74,16 @@ public class Passenger {
 
     public void setFlights(List<Flight> flights) {
         this.flights = flights;
+    }
+
+    @Override
+    public String toString() {
+        return "Passenger{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", nationality='" + nationality + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", passportCode='" + passportCode + '\'' +
+                '}';
     }
 }

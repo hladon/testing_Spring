@@ -20,19 +20,23 @@ public class Plane {
     public Long getId() {
         return id;
     }
+
     @Column(name = "MODEL")
     public String getModel() {
         return model;
     }
-    @Column(name="CODE")
+
+    @Column(name = "CODE")
     public String getCode() {
         return code;
     }
-    @Column(name="YEAR_PRODUCED")
+
+    @Column(name = "YEAR_PRODUCED")
     public Date getYearProduced() {
         return yearProduced;
     }
-    @Column(name="CONSUMPTION")
+
+    @Column(name = "CONSUMPTION")
     public Double getAvgFuelConsumption() {
         return avgFuelConsumption;
     }
@@ -55,5 +59,16 @@ public class Plane {
 
     public void setAvgFuelConsumption(Double avgFuelConsumption) {
         this.avgFuelConsumption = avgFuelConsumption;
+    }
+
+    @Override
+    public String toString() {
+        return "Plane{" +
+                "id=" + id +
+                ", model='" + model + '\'' +
+                ", code='" + code + '\'' +
+                ", yearProduced=" + yearProduced +
+                ", avgFuelConsumption=" + avgFuelConsumption +
+                '}';
     }
 }
