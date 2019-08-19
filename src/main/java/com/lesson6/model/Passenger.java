@@ -8,12 +8,12 @@ import java.util.List;
 @Entity
 @Table(name = "PASSENGER")
 public class Passenger {
-    Long id;
-    String lastName;
-    String nationality;
-    Date dateOfBirth;
-    String passportCode;
-    List<Flight> flights;
+    private Long id;
+    private String lastName;
+    private String nationality;
+    private Date dateOfBirth;
+    private String passportCode;
+    private List<Flight> flights;
 
     @Id
     @SequenceGenerator(name = "PASSENGER_SK", sequenceName = "PASSENGER_SK", allocationSize = 1)

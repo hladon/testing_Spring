@@ -8,11 +8,11 @@ import java.util.Date;
 @Table(name = "PLANE")
 public class Plane {
 
-    Long id;
-    String model;
-    String code;
-    Date yearProduced;
-    Double avgFuelConsumption;
+    private Long id;
+    private String model;
+    private String code;
+    private Date yearProduced;
+    private Double avgFuelConsumption;
 
     @Id
     @SequenceGenerator(name = "PLANE_SK", sequenceName = "PLANE_SK", allocationSize = 1)

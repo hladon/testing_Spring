@@ -18,6 +18,7 @@ public class FlightDao extends Repository<Flight> {
     }
 
     public List<Flight> flightsByDate(Filter filter) {
+        List<Flight> result = null;
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Flight> criteria = builder.createQuery(Flight.class);
         Root<Flight> root = criteria.from(Flight.class);
@@ -31,42 +32,44 @@ public class FlightDao extends Repository<Flight> {
         }
         predicates.add(builder.between(root.get("dateFlight"), filter.getDateFrom(), filter.getDateTo()));
         criteria.where(predicates.toArray(new Predicate[]{}));
+        try {
+            result = entityManager.createQuery(criteria).getResultList();
+        } catch (Exception e) {
+            System.out.println("Some thing wrong with getting data from repository!");
+            throw e;
+        }
         return entityManager.createQuery(criteria).getResultList();
     }
 
     public List<Flight> mostPopularFrom() {
-        List<Flight> list = entityManager.createNativeQuery("SELECT * FROM (\n" +
-                "SELECT *  FROM FLIGHT \n" +
-                "INNER JOIN (SELECT STORY.FLIGHT,COUNT(STORY.FLIGHT) AS PAS FROM STORY \n" +
-                "GROUP BY STORY.FLIGHT )\n" +
-                "STORY ON STORY.FLIGHT=FLIGHT.ID) FL\n" +
-                "INNER JOIN (\n" +
-                "SELECT FLIGHT.CITY_FROM,MAX(PAS) MPAS FROM FLIGHT \n" +
-                "INNER JOIN (SELECT STORY.FLIGHT,COUNT(STORY.FLIGHT) AS PAS FROM STORY \n" +
-                "GROUP BY STORY.FLIGHT )\n" +
-                "STORY ON STORY.FLIGHT=FLIGHT.ID\n" +
-                "GROUP BY FLIGHT.CITY_FROM) MFL\n" +
-                "ON FL.CITY_FROM=MFL.CITY_FROM AND\n" +
-                "FL.PAS=MFL.MPAS \n" +
-                "ORDER BY PAS DESC", Flight.class).getResultList();
+        List<Flight> list = null;
+        try {
+            list = entityManager.createNativeQuery(
+                    "SELECT FLIIGHT.*  FROM FLIGHT \n" +
+                    "LEFT JOIN (SELECT CITY_FROM,COUNT(FLIGHT_ID) AS RNK FROM FLIGHT \n" +
+                    "GROUP BY CITY_FROM ) CITY_RNK \n" +
+                    "ON FLIGHT.CITY_FROM=CITY_RNK.RNK \n"  +
+                    "ORDER BY CITY_RNK.RNK DESC ", Flight.class).getResultList();
+        } catch (Exception e) {
+            System.out.println("Some thing wrong with getting data from repository!");
+            throw e;
+        }
         return list;
     }
 
     public List<Flight> mostPopularTo() {
-        List<Flight> list = entityManager.createNativeQuery("SELECT * FROM (\n" +
-                "SELECT *  FROM FLIGHT \n" +
-                "INNER JOIN (SELECT STORY.FLIGHT,COUNT(STORY.FLIGHT) AS PAS FROM STORY \n" +
-                "GROUP BY STORY.FLIGHT )\n" +
-                "STORY ON STORY.FLIGHT=FLIGHT.ID) FL\n" +
-                "INNER JOIN (\n" +
-                "SELECT FLIGHT.CITY_TO,MAX(PAS) MPAS FROM FLIGHT \n" +
-                "INNER JOIN (SELECT STORY.FLIGHT,COUNT(STORY.FLIGHT) AS PAS FROM STORY \n" +
-                "GROUP BY STORY.FLIGHT )\n" +
-                "STORY ON STORY.FLIGHT=FLIGHT.ID\n" +
-                "GROUP BY FLIGHT.CITY_TO) MFL\n" +
-                "ON FL.CITY_TO=MFL.CITY_TO AND\n" +
-                "FL.PAS=MFL.MPAS \n" +
-                "ORDER BY PAS DESC", Flight.class).getResultList();
+        List<Flight> list = null;
+        try {
+            list = entityManager.createNativeQuery(
+                    "SELECT FLIIGHT.*  FROM FLIGHT \n" +
+                    "LEFT JOIN (SELECT CITY_TO,COUNT(FLIGHT_ID) AS RNK FROM FLIGHT \n" +
+                    "GROUP BY CITY_TO ) CITY_RNK \n" +
+                    "ON FLIGHT.CITY_TO=CITY_RNK.RNK \n"  +
+                    "ORDER BY CITY_RNK.RNK DESC ", Flight.class).getResultList();
+        } catch (Exception e) {
+            System.out.println("Some thing wrong with getting data from repository!");
+            throw e;
+        }
         return list;
     }
 }
