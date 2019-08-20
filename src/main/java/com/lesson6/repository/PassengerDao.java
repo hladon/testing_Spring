@@ -15,11 +15,12 @@ public class PassengerDao extends Repository<Passenger> {
         List<Passenger> list;
         try {
             list = entityManager.createNativeQuery(
-                    "SELECT PASSENGER.* FROM PASSENGER\n" +
-                            "INNER JOIN (SELECT STORY.PASSENGER,COUNT(STORY.PASSENGER) FROM STORY\n" +
-                            "INNER JOIN FLIGHT ON FLIGHT.ID=STORY.FLIGHT\n" +
-                            "AND EXTRACT(YEAR FROM FLIGHT.DATE_FLIGHT)=?1\n" +
-                            "GROUP BY STORY.PASSENGER HAVING COUNT(STORY.PASSENGER)>?2 ) STORY  ON STORY.PASSENGER=PASSENGER.ID\n",
+                    "SELECT * FROM PASSENGER WHERE EXISTS\n" +
+                            "(SELECT * FROM STORY \n" +
+                            "JOIN FLIGHT ON STORY.FLIGHT=FLIGHT.ID\n" +
+                            "WHERE STORY.PASSENGER =PASSENGER.ID AND EXTRACT (YEAR FROM FLIGHT.DATE_FLIGHT)=?1\n" +
+                            "GROUP BY STORY.PASSENGER \n" +
+                            "HAVING COUNT(DISTINCT FLIGHT.ID)>=?2)",
                     Passenger.class).
                     setParameter(1, year).
                     setParameter(2, flights).
